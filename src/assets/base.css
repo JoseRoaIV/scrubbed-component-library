@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #f7fafc;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  text-rendering: geometricPrecision;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: #e7e7e7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6d6d6d;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.dropdown-fade-enter-active,
+.dropdown-fade-leave-active {
+  transition: opacity 0.1s ease-in-out;
+}
+
+.dropdown-fade-enter-from,
+.dropdown-fade-leave-to {
+  opacity: 0;
+}
+
+@layer base {
+  th {
+    @apply font-body font-semibold text-bunker-500 text-xs text-start px-3 pb-6;
+  }
+
+  td {
+    @apply font-body font-medium text-bunker-900 text-xs p-3;
+  }
+
+  td:first-child {
+    @apply rounded-s-md;
+  }
+  td:last-child {
+    @apply rounded-e-md;
+  }
+
+  tbody > tr:nth-child(odd) {
+    @apply bg-bunker-50/50;
+  }
+
+  tbody > tr:hover {
+    @apply bg-bunker-100 transition-all;
+  }
+}

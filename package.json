@@ -1,0 +1,33 @@
+{
+  "name": "scrubbed-component-library",
+  "version": "0.5.1-b-beta",
+  "type": "module",
+  "main": "/dist/scrubbed-component-library.umd.js",
+  "module": "/dist/scrubbed-component-library.es.js",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/scrubbed-component-library.es.js",
+      "require": "./dist/scrubbed-component-library.cjs.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "buildtailwind": "tailwindcss -i ./src/assets/base.css -o ./src/assets/main.css",
+    "watchtailwind": "tailwindcss -i ./src/assets/base.css -o ./src/assets/main.css --watch"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.427.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.5",
+    "tailwindcss": "^3.4.4",
+    "vite": "^5.3.1",
+    "vue": "^3.4.29",
+    "vue-router": "^4.4.0"
+  }
+}
