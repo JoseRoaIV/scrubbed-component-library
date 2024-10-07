@@ -5,17 +5,13 @@
       <AppSidebar>
         <AppSidebarList>
           <AppSidebarItem v-for="(route, index) in sidebarRoutes" :key="index" :to="route.to">
-            {{ route.name }}
+            <span v-if="route.icon"> <component :is="route.icon" class="size-4 [&.router-link-active]:stroke-matisse-900"></component> </span>
+            <span class="route-link"> {{ route.name }} </span>
 
             <template v-if="route.children" #children>
-              <li v-for="(child, index) in route.children" :key="index" class="w-full">
-                <RouterLink
-                  class="block font-body font-normal p-3 text-bunker-700 text-sm transition-all w-[inherit] hover:bg-bunker-100 hover:rounded-md hover:font-semibold [&.router-link-active]:font-semibold [&.router-link-active]:text-matisse-900 [&.router-link-active]:bg-bunker-100"
-                  :to="child.to"
-                >
-                  {{ child.name }}
-                </RouterLink>
-              </li>
+              <AppSidebarSubItem v-for="(child, index) in route.children" :key="index" :to="child.to">
+                {{ child.name }}
+              </AppSidebarSubItem>
             </template>
           </AppSidebarItem>
         </AppSidebarList>
@@ -97,17 +93,18 @@
 <script setup>
 import { AppContentLayout, AppContentInnerLayout } from "../components/ui/layout";
 import { Tabs, TabsList, TabsItem } from "../components/ui/content";
-import { AppSidebar, AppSidebarList, AppSidebarItem } from "../components/ui/sidebar";
+import { AppSidebar, AppSidebarList, AppSidebarItem, AppSidebarSubItem } from "../components/ui/sidebar";
 import { Breadcrumb, BreadcrumbArrow, BreadcrumbItem } from "../components/ui/breadcrumb";
+import { Timer, Notebook, TimerReset, Moon, Settings } from "lucide-vue-next";
 import { IconButton } from "../components/ui/button";
 import { IconDelete } from "../components/ui/icons";
 import { Card } from "../components/ui/card";
-import { RouterLink } from "vue-router";
 
 const sidebarRoutes = [
   {
     to: "/timer",
     name: "Timetracker",
+    icon: Timer,
     children: [
       {
         to: "/hris",
@@ -127,10 +124,10 @@ const sidebarRoutes = [
       },
     ],
   },
-  { to: "/hris", name: "Timetrack Review" },
-  { to: "/hris", name: "Timetrack Duration" },
-  { to: "/hris", name: "Overtime & Night Shift Filing" },
-  { to: "/hris", name: "Settings" },
+  { to: "/hris", name: "Timetrack Review", icon: Notebook },
+  { to: "/hris", name: "Timetrack Duration", icon: TimerReset },
+  { to: "/hris", name: "Overtime & Night Shift Filing", icon: Moon },
+  { to: "/hris", name: "Settings", icon: Settings },
 ];
 </script>
 

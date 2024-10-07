@@ -1,14 +1,27 @@
 <template>
   <input
+    @blur="blur = true"
     v-bind="$attrs"
     v-model="model"
     type="text"
-    class="peer bg-white rounded-md px-3 py-2 h-10 appearance-none font-body font-medium text-xs text-woodsmoke-900 placeholder:text-bunker-400 focus:outline-none border-[1px] border-bunker-200 focus:ring-offset-2 focus:ring-2 focus:ring-matisse-900 file:ps-0 file:border-transparent file:bg-transparent file:font-bold file:text-matisse-900 file:hover:transition-all file:rounded file:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:invalid:ring-red-orange-500 invalid:ring-red-orange-500 invalid:text-red-orange-600 invalid:ring-1"
+    class="peer bg-white rounded-md px-3 py-2 h-10 appearance-none font-body font-medium text-xs text-bunker-950 placeholder:text-bunker-400 focus:outline-none border-[1px] border-bunker-200 focus:ring-offset-2 focus:ring-2 focus:ring-matisse-900 file:ps-0 file:border-transparent file:bg-transparent file:font-bold file:text-matisse-900 file:hover:transition-all file:rounded file:cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed focus:invalid:ring-red-orange-500"
+    ref="input"
+    :class="invalidStates"
   />
 </template>
 
 <script setup>
+import { computed, ref } from "vue";
+
 const model = defineModel();
+const input = ref(null);
+const blur = ref(false);
+
+const invalidStates = computed(() => {
+  if (input.value && input.value.required && blur.value) {
+    return ["invalid:ring-red-orange-500", "invalid:text-red-orange-600 ", "invalid:ring-1"];
+  }
+});
 </script>
 
 <style scoped>

@@ -53,6 +53,9 @@ body {
 }
 
 @layer base {
+  * {
+    @apply font-body;
+  }
   th {
     @apply font-body font-semibold text-bunker-500 text-xs text-start px-3 pb-6;
   }
