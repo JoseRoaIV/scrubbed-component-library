@@ -1,5 +1,4 @@
 <template>
-  <div>Test</div>
   <AppContentLayout>
     <template #sidebar>
       <AppSidebar>

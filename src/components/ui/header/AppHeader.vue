@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center justify-between px-6 h-16 bg-white">
+  <div class="flex items-center justify-between px-6 h-16 bg-white shadow-sm">
     <div class="flex items-end justify-center gap-6">
       <div class="block md:hidden">
         <button>
@@ -28,9 +28,7 @@
               </div>
               <hr />
               <ul class="flex flex-col items-start justify-center w-full">
-                <li @click="console.log('clicked')" class="p-2 mt-1 text-sm w-full rounded-md cursor-pointer text-bunker-950 hover:bg-woodsmoke-50 hover:transition-all">
-                  Profile Settings
-                </li>
+                <li @click="console.log('clicked')" class="p-2 mt-1 text-sm w-full rounded-md cursor-pointer text-bunker-950 hover:bg-woodsmoke-50 hover:transition-all">Profile Settings</li>
                 <li class="p-2 text-sm w-full rounded-md cursor-pointer text-bunker-950 hover:bg-woodsmoke-50 hover:transition-all">Manage Users</li>
                 <li class="p-2 mb-1 text-sm w-full rounded-md cursor-pointer text-bunker-950 hover:bg-woodsmoke-50 hover:transition-all">Settings</li>
                 <hr class="w-full" />
