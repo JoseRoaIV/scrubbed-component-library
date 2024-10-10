@@ -14,6 +14,18 @@
             </template>
           </AppSidebarItem>
         </AppSidebarList>
+        <AppSidebarList>
+          <AppSidebarItem v-for="(route, index) in sidebarRoutes2" :key="index" :to="route.to">
+            <span v-if="route.icon"> <component :is="route.icon" class="size-4 [&.router-link-active]:stroke-matisse-900"></component> </span>
+            <span class="route-link"> {{ route.name }} </span>
+
+            <template v-if="route.children" #children>
+              <AppSidebarSubItem v-for="(child, index) in route.children" :key="index" :to="child.to">
+                {{ child.name }}
+              </AppSidebarSubItem>
+            </template>
+          </AppSidebarItem>
+        </AppSidebarList>
       </AppSidebar>
     </template>
 
@@ -30,7 +42,7 @@
           <h1 class="font-body font-bold text-matisse-900 text-4xl">Reserved Today</h1>
           <Tabs>
             <TabsList>
-              <TabsItem to="/">Workstation A</TabsItem>
+              <TabsItem to="/timer">Workstation A</TabsItem>
               <TabsItem to="wb">Workstation B</TabsItem>
               <TabsItem to="wc">Workstation C</TabsItem>
               <TabsItem to="wd">Workstation D</TabsItem>
@@ -102,6 +114,36 @@ import { Card } from "../components/ui/card";
 const sidebarRoutes = [
   {
     to: "/timer",
+    name: "Timetracker",
+    icon: Timer,
+    children: [
+      {
+        to: "/hris",
+        name: "Workstation A",
+      },
+      {
+        to: "/hris",
+        name: "Workstation B",
+      },
+      {
+        to: "/hris",
+        name: "Workstation C",
+      },
+      {
+        to: "/hris",
+        name: "Workstation D",
+      },
+    ],
+  },
+  { to: "/hris", name: "Timetrack Review", icon: Notebook },
+  { to: "/hris", name: "Timetrack Duration", icon: TimerReset },
+  { to: "/hris", name: "Overtime & Night Shift Filing", icon: Moon },
+  { to: "/hris", name: "Settings", icon: Settings },
+];
+
+const sidebarRoutes2 = [
+  {
+    to: "/timer2",
     name: "Timetracker",
     icon: Timer,
     children: [

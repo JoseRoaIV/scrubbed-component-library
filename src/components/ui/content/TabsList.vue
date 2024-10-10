@@ -1,5 +1,5 @@
 <template>
-  <nav class="w-full flex items-center" draggable="true">
+  <nav class="w-full flex items-center gap-2">
     <button
       v-if="listRefScrollWidth > listRefClientWidth"
       @click="scrollLeft"
@@ -11,7 +11,7 @@
       </div>
     </button>
 
-    <ul class="flex items-center justify-start mb-1 overflow-x-hidden relative" ref="listRef">
+    <ul class="bg-woodsmoke-100/40 rounded-lg flex items-center justify-start overflow-x-scroll relative p-1" ref="listRef">
       <slot></slot>
     </ul>
 
@@ -82,4 +82,22 @@ watchEffect(() => {
 });
 </script>
 
-<style scoped></style>
+<style>
+::-webkit-scrollbar {
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: #e7e7e7;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b0b0b0;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  height: 2px;
+  background: #929292;
+}
+</style>

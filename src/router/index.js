@@ -13,6 +13,11 @@ const router = createRouter({
       name: "Timer",
       component: () => import("../views/TimerView.vue"),
     },
+    {
+      path: "/timer2",
+      name: "Timer2",
+      component: () => import("../views/Timer2View.vue"),
+    },
   ],
 });
 

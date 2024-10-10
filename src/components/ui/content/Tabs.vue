@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs w-full border-b-[1px] border-bunker-200">
+  <div class="tabs w-full">
     <slot></slot>
   </div>
 </template>
