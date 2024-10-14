@@ -1,16 +1,23 @@
 <template>
   <li
     class="flex flex-col items-center justify-center min-h-10 rounded-md transition-all w-full whitespace-nowrap overflow-hidden"
-    :class="{ 'hover:bg-bunker-100': checkIfCurrentPathIsRouteAddress }"
+    :class="checkIfCurrentPathIsRouteAddress ? 'hover:bg-bunker-100' : ' hover:bg-bunker-50'"
   >
-    <div @click="toggleSubMenu()" class="flex items-center justify-between p-3 w-full rounded-t-[inherit] min-h-11" :class="{ 'bg-bunker-100': checkIfCurrentPathIsRouteAddress }">
+    <div
+      @click="toggleSubMenu()"
+      class="flex items-center justify-between p-3 w-full rounded-t-[inherit] min-h-11 whitespace-nowrap overflow-hidden"
+      :class="{ 'bg-bunker-100': checkIfCurrentPathIsRouteAddress }"
+    >
       <RouterLink
-        class="flex items-center justify-start gap-3 font-body text-bunker-700 text-sm w-full whitespace-nowrap overflow-hidden text-ellipsis transition-all stroke-bunker-500"
-        :class="checkIfCurrentPathIsRouteAddress ? 'font-bold text-matisse-900' : 'font-normal hover:font-semibold'"
+        v-if="isInternalLink"
+        class="flex items-center justify-start gap-3 font-normal text-bunker-500 text-sm w-full transition-all stroke-bunker-500 hover:text-matisse-900 [&.router-link-active]:text-matisse-900 [&.router-link-active]:font-bold"
         :to="props.to"
       >
         <slot />
       </RouterLink>
+      <a v-else class="flex items-center justify-start gap-3 font-normal text-bunker-500 text-sm w-full transition-all stroke-bunker-500" :href="props.to">
+        <slot />
+      </a>
       <ChevronDown
         v-if="$slots.children"
         class="size-4 stroke-bunker-400 transition-all route-arrow"
@@ -37,6 +44,7 @@ const props = defineProps({
 });
 
 const isSubMenuActive = ref(false);
+const isInternalLink = props.to.startsWith("/");
 
 const checkIfCurrentPathIsRouteAddress = computed(() => {
   return route.path === props.to;

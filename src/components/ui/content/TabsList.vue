@@ -11,7 +11,7 @@
       </div>
     </button>
 
-    <ul class="bg-woodsmoke-100/40 rounded-lg flex items-center justify-start overflow-x-scroll relative p-1" ref="listRef">
+    <ul class="bg-danube-100/60 rounded-lg flex items-center justify-start overflow-x-scroll relative p-1" ref="listRef">
       <slot></slot>
     </ul>
 

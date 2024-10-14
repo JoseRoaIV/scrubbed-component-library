@@ -5,7 +5,7 @@
         <AppSidebarList>
           <AppSidebarItem v-for="(route, index) in sidebarRoutes" :key="index" :to="route.to">
             <span v-if="route.icon"> <component :is="route.icon" class="size-4 [&.router-link-active]:stroke-matisse-900"></component> </span>
-            <span class="route-link"> {{ route.name }} </span>
+            <span class="route-link min-w-0 overflow-hidden whitespace-nowrap text-ellipsis"> {{ route.name }} </span>
 
             <template v-if="route.children" #children>
               <AppSidebarSubItem v-for="(child, index) in route.children" :key="index" :to="child.to">
@@ -17,7 +17,7 @@
         <AppSidebarList>
           <AppSidebarItem v-for="(route, index) in sidebarRoutes2" :key="index" :to="route.to">
             <span v-if="route.icon"> <component :is="route.icon" class="size-4 [&.router-link-active]:stroke-matisse-900"></component> </span>
-            <span class="route-link"> {{ route.name }} </span>
+            <span class="route-link min-w-0 overflow-hidden whitespace-nowrap text-ellipsis"> {{ route.name }} </span>
 
             <template v-if="route.children" #children>
               <AppSidebarSubItem v-for="(child, index) in route.children" :key="index" :to="child.to">
@@ -50,13 +50,6 @@
               <TabsItem to="/">Workstation A</TabsItem>
               <TabsItem to="wb">Workstation B</TabsItem>
               <TabsItem to="wc">Workstation C</TabsItem>
-              <TabsItem to="wd">Workstation D</TabsItem>
-              <TabsItem to="we">Workstation E</TabsItem>
-              <TabsItem to="/">Workstation A</TabsItem>
-              <TabsItem to="wb">Workstation B</TabsItem>
-              <TabsItem to="wc">Workstation C</TabsItem>
-              <TabsItem to="wd">Workstation D</TabsItem>
-              <TabsItem to="we">Workstation E</TabsItem>
             </TabsList>
           </Tabs>
         </template>

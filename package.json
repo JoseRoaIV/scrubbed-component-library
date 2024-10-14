@@ -1,6 +1,6 @@
 {
   "name": "scrubbed-component-library",
-  "version": "0.5.1-b-beta",
+  "version": "0.5.3-b-beta",
   "type": "module",
   "main": "/dist/scrubbed-component-library.umd.js",
   "module": "/dist/scrubbed-component-library.es.js",
