@@ -1,8 +1,8 @@
 <template>
   <div
     @mouseleave="handelMouseleave"
-    class="sidebar fixed h-full transition-all z-[200]"
-    :class="isSidebarPinned ? 'w-[223px]' : 'max-w-[72px] min-w-[72px] hover:w-[223px]'"
+    class="sidebar fixed h-[calc(100dvh-4rem)] transition-all z-50"
+    :class="isSidebarPinned ? 'pinned w-[223px] ' : 'max-w-[72px] min-w-[72px] hover:w-[223px]'"
     ref="sidebarContainerRef"
   >
     <div
@@ -30,6 +30,7 @@ const isSidebarPinned = ref(true);
 
 function handleSidebarPinning() {
   const routeArrow = document.querySelectorAll(".route-arrow");
+  const submenu = document.querySelectorAll(".submenu");
   const main = document.querySelector("main");
 
   if (isSidebarPinned.value) {
@@ -38,30 +39,58 @@ function handleSidebarPinning() {
     main.classList.toggle("md:pl-[108px]");
 
     isSidebarPinned.value = false;
+
+    submenu.forEach((menu) => {
+      if (menu.classList.contains("active")) {
+        menu.classList.add("hidden");
+      }
+    });
   } else {
     routeArrow.forEach((arrow) => arrow.classList.remove("hidden"));
     main.classList.toggle("md:pl-[108px]");
     main.classList.toggle("md:pl-[259px]");
     isSidebarPinned.value = true;
+
+    submenu.forEach((menu) => {
+      if (menu.classList.contains("active")) {
+        menu.classList.remove("hidden");
+      }
+    });
   }
 }
 
 function handleMouseover() {
   const routeArrow = document.querySelectorAll(".route-arrow");
+  const submenu = document.querySelectorAll(".submenu");
 
   if (!isSidebarPinned.value) {
     sidebarContainerRef.value.classList.remove("hover:max-w-[223px]");
     sidebarContainerRef.value.classList.add("hover:max-w-[223px]");
+    sidebarContainerRef.value.classList.toggle("pinned");
     routeArrow.forEach((arrow) => arrow.classList.remove("hidden"));
+
+    submenu.forEach((menu) => {
+      if (menu.classList.contains("active")) {
+        menu.classList.remove("hidden");
+      }
+    });
   }
 }
 
 function handelMouseleave() {
   const routeArrow = document.querySelectorAll(".route-arrow");
+  const submenu = document.querySelectorAll(".submenu");
 
   if (!isSidebarPinned.value) {
     sidebarContainerRef.value.classList.add("max-w-[72px]", "min-w-[72px]", "hover:max-w-[223px]");
+    sidebarContainerRef.value.classList.remove("pinned");
     routeArrow.forEach((arrow) => arrow.classList.add("hidden"));
+
+    submenu.forEach((menu) => {
+      if (menu.classList.contains("active")) {
+        menu.classList.add("hidden");
+      }
+    });
   }
 }
 </script>

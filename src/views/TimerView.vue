@@ -14,18 +14,6 @@
             </template>
           </AppSidebarItem>
         </AppSidebarList>
-        <AppSidebarList>
-          <AppSidebarItem v-for="(route, index) in sidebarRoutes2" :key="index" :to="route.to">
-            <span v-if="route.icon"> <component :is="route.icon" class="size-4 [&.router-link-active]:stroke-matisse-900"></component> </span>
-            <span class="route-link min-w-0 overflow-hidden whitespace-nowrap text-ellipsis"> {{ route.name }} </span>
-
-            <template v-if="route.children" #children>
-              <AppSidebarSubItem v-for="(child, index) in route.children" :key="index" :to="child.to">
-                {{ child.name }}
-              </AppSidebarSubItem>
-            </template>
-          </AppSidebarItem>
-        </AppSidebarList>
       </AppSidebar>
     </template>
 
@@ -128,7 +116,28 @@ const sidebarRoutes = [
       },
     ],
   },
-  { to: "/hris", name: "Timetrack Review", icon: Notebook },
+  {
+    name: "Timetrack Review",
+    icon: Notebook,
+    children: [
+      {
+        to: "/hris1",
+        name: "Workstation A",
+      },
+      {
+        to: "/hris",
+        name: "Workstation B",
+      },
+      {
+        to: "/hris",
+        name: "Workstation C",
+      },
+      {
+        to: "/hris",
+        name: "Workstation D",
+      },
+    ],
+  },
   { to: "/hris", name: "Timetrack Duration", icon: TimerReset },
   { to: "/hris", name: "Overtime & Night Shift Filing", icon: Moon },
   { to: "/hris", name: "Settings", icon: Settings },
@@ -141,7 +150,7 @@ const sidebarRoutes2 = [
     icon: Timer,
     children: [
       {
-        to: "/hris",
+        to: "/hris1",
         name: "Workstation A",
       },
       {

@@ -16,7 +16,7 @@
         <div v-if="$slots.headerActions" class="flex items-center justify-center gap-2">
           <slot name="headerActions"></slot>
         </div>
-        <div class="relative flex flex-col items-end justify-center">
+        <div v-if="$slots.headerUserProfile" class="relative flex flex-col items-end justify-center">
           <div @click="toggleUserMenu()" class="rounded-full size-8" ref="userMenuRef">
             <slot name="headerUserProfile"></slot>
           </div>

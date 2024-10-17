@@ -1,23 +1,37 @@
 <template>
-  <li
-    class="flex flex-col items-center justify-center min-h-10 rounded-md transition-all w-full whitespace-nowrap overflow-hidden"
-    :class="checkIfCurrentPathIsRouteAddress ? 'hover:bg-bunker-100' : ' hover:bg-bunker-50'"
-  >
+  <li class="group flex flex-col items-center justify-center min-h-10 rounded-md transition-all w-full whitespace-nowrap overflow-hidden">
     <div
       @click="toggleSubMenu()"
-      class="flex items-center justify-between p-3 w-full rounded-t-[inherit] min-h-11 whitespace-nowrap overflow-hidden"
-      :class="{ 'bg-bunker-100': checkIfCurrentPathIsRouteAddress }"
+      class="flex items-center justify-between p-3 w-full rounded-t-[inherit] min-h-11 whitespace-nowrap overflow-hidden cursor-pointer"
+      :class="checkIfCurrentPathIsRouteAddress || isSubMenuActive ? 'bg-bunker-100' : 'hover:bg-bunker-50'"
     >
-      <RouterLink
-        v-if="isInternalLink"
-        class="flex items-center justify-start gap-3 font-normal text-bunker-500 text-sm w-full transition-all stroke-bunker-500 hover:text-matisse-900 [&.router-link-active]:text-matisse-900 [&.router-link-active]:font-bold"
-        :to="props.to"
+      <span v-if="props.to">
+        <RouterLink
+          v-if="isInternalLink"
+          class="flex items-center justify-start gap-3 text-sm w-full transition-all stroke-bunker-500 group-hover:text-matisse-900 [&.router-link-active]:text-matisse-900 [&.router-link-active]:font-bold"
+          :class="isSubMenuActive ? 'text-matisse-900 font-bold' : 'text-bunker-500 '"
+          :to="props.to"
+        >
+          <slot />
+        </RouterLink>
+        <a
+          v-else
+          class="flex items-center justify-start gap-3 text-sm w-full transition-all stroke-bunker-500 group-hover:text-matisse-900"
+          :class="isSubMenuActive ? 'text-matisse-900 font-bold' : 'text-bunker-500 '"
+          :href="props.to"
+        >
+          <slot />
+        </a>
+      </span>
+
+      <span
+        v-else
+        class="flex items-center justify-start gap-3 text-sm w-full transition-all stroke-bunker-500 group-hover:text-matisse-900"
+        :class="isSubMenuActive ? 'text-matisse-900 font-bold' : 'text-bunker-500 '"
       >
         <slot />
-      </RouterLink>
-      <a v-else class="flex items-center justify-start gap-3 font-normal text-bunker-500 text-sm w-full transition-all stroke-bunker-500" :href="props.to">
-        <slot />
-      </a>
+      </span>
+
       <ChevronDown
         v-if="$slots.children"
         class="size-4 stroke-bunker-400 transition-all route-arrow"
@@ -25,7 +39,13 @@
       />
     </div>
 
-    <div v-if="isSubMenuActive" class="rounded-b-[inherit] w-full transition-all" :class="(showSubMenuClass, { 'bg-bunker-50': checkIfCurrentPathIsRouteAddress })">
+    <div
+      :class="[
+        'submenu rounded-b-[inherit] w-full transition-all',
+        { 'active bg-bunker-50': isSubMenuActive },
+        '[&.active]:h-auto [&.active]:visible [&.active]:opacity-100 h-0 invisible opacity-0',
+      ]"
+    >
       <ul v-if="$slots.children" class="flex flex-col items-start justify-center p-2 gap-0">
         <slot name="children" />
       </ul>
@@ -40,18 +60,14 @@ import { computed, ref, watch } from "vue";
 
 const route = useRoute();
 const props = defineProps({
-  to: { type: String, required: true },
+  to: { type: String },
 });
 
 const isSubMenuActive = ref(false);
-const isInternalLink = props.to.startsWith("/");
+const isInternalLink = props.to ? props.to.startsWith("/") : false;
 
 const checkIfCurrentPathIsRouteAddress = computed(() => {
-  return route.path === props.to;
-});
-
-const showSubMenuClass = computed(() => {
-  return isSubMenuActive.value ? ["h-auto", "visible", "opacity-100"] : ["h-0", "invisible", "opacity-0"];
+  return route.path.includes(props.to);
 });
 
 function toggleSubMenu() {
@@ -61,7 +77,7 @@ function toggleSubMenu() {
 watch(
   () => route.path,
   (newPath) => {
-    isSubMenuActive.value = newPath === props.to;
+    isSubMenuActive.value = newPath.includes(props.to);
   },
   { immediate: true }
 );
