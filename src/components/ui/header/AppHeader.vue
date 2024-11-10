@@ -6,7 +6,9 @@
           <Menu class="size-4" />
         </button>
       </div>
-      <img src="/src/assets/scrubbed_logo_small.png" alt="Scrubbed Logo" class="" />
+      <a href="https://community.scrubbed.net/">
+        <img src="/src/assets/scrubbed_logo_small.png" alt="Scrubbed Logo" />
+      </a>
     </div>
     <div class="flex items-center justify-center">
       <div class="flex items-center gap-[14px] md:gap-10">
